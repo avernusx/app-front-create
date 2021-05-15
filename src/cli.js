@@ -43,16 +43,7 @@ async function promptForMissingOptions(options) {
       default: defaultTemplate,
     });
   }
-
-  if (!options.git) {
-    questions.push({
-      type: 'confirm',
-      name: 'git',
-      message: 'Инициализовать новый репозиторий?',
-      default: false,
-    });
-  }
-
+  
   const answers = await inquirer.prompt(questions);
   return {
     ...options,

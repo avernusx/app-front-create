@@ -26,16 +26,7 @@ async function copyTemplateFiles(options) {
   if (result.failed) {
     return Promise.reject(new Error('Failed to initialize git'));
   }
-  return;
-}
-
-async function initGit(options) {
-  const result = await execa('git', ['init'], {
-    cwd: options.targetDirectory,
-  });
-  if (result.failed) {
-    return Promise.reject(new Error('Failed to initialize git'));
-  }
+  await execa('git', ['remote', 'remove', 'origin'])
   return;
 }
 
@@ -64,25 +55,9 @@ export async function createProject(options) {
   const tasks = new Listr(
     [
       {
-        title: 'Copy project files',
+        title: 'Копирование файлов',
         task: () => copyTemplateFiles(options),
-      },
-      {
-        title: 'Initialize git',
-        task: () => initGit(options),
-        enabled: () => options.git,
-      },
-      /*{
-        title: 'Install dependencies',
-        task: () =>
-          projectInstall({
-            cwd: options.targetDirectory,
-          }),
-        skip: () =>
-          !options.runInstall
-            ? undefined
-            : undefined,
-      },*/
+      }
     ],
     {
       exitOnError: false,
