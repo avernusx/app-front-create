@@ -1,6 +1,6 @@
 {
   "name": "@avernusx/app-front-create",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A CLI to bootstrap apptimizm projects",
   "main": "src/index.js",
   "bin": "bin/app-front-create",
